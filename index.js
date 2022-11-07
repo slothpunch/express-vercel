@@ -1,13 +1,23 @@
+// https://www.youtube.com/watch?v=vCuf62T2snY
 
-// https://syntackle.live/blog/how-to-create-and-deploy-an-express-js-app-to-vercel-ljgvGrsCH7ioHsAxuw3G/
-
+// Import packages
 const express = require('express');
-const product = require('./api/product');
+const product = require('./public/product');
+
+// Middleware
 const app = express();
+app.use(express.json());
 
+// Routers
+app.use('/', express.static('public'))
+app.get('/', (req, res) => {
+    res.sendFile('index.html', {root: path.join(__dirname, 'public')});
+  })
+
+app.use('/public/product', product)
+
+// Connection
 const PORT = process.env.PORT || 3000;
-
-app.use('/api/product', product)
-
 app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
 
+// module.exports = app
