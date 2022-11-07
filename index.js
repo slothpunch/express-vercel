@@ -2,15 +2,12 @@
 // https://syntackle.live/blog/how-to-create-and-deploy-an-express-js-app-to-vercel-ljgvGrsCH7ioHsAxuw3G/
 
 const express = require('express');
+const product = require('./api/product');
 const app = express();
 
-app.use(express.static('public')) // As it is a middleware, it should be above all request handlers 
+const PORT = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-    res.sendFile('index.html', {root: path.join(__dirname, 'public')});
-  })
+app.use('/api/product', product)
 
-app.listen(process.env.PORT || 3000);
+app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
 
-// Export the Express API
-module.exports = app 
