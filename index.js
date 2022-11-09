@@ -9,12 +9,8 @@ const app = express();
 app.use(express.json());
 
 // Routers
-app.use('/', express.static('public'))
-app.get('/', (req, res) => {
-    res.sendFile('index.html', {root: path.join(__dirname, 'public')});
-  })
-
-app.use('/public/product', product)
+app.use('/', express.static(path.resolve(__dirname, 'public')));
+app.use('/product', product)
 
 // Connection
 const PORT = process.env.PORT || 3000;
