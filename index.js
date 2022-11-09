@@ -10,7 +10,7 @@ app.use(express.json());
 
 // Routers
 app.use('/', express.static(path.resolve(__dirname, 'public')));
-app.use('/product', product)
+app.use('/public/product', product)
 
 // Connection
 const PORT = process.env.PORT || 3000;
